@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Статистика кампаний · CRM{% endblock %}{% block content %}
+<h1>Статистика рекламных кампаний</h1><p class="muted">Доход — сумма контрактов активных клиентов, привлечённых кампанией. Покрытие бюджета = доход / рекламный бюджет × 100%.</p>
+{% if campaigns %}<div class="table-wrap"><table><thead><tr><th>Кампания</th><th>Потенциальные</th><th>Активные</th><th>Конверсия</th><th>Доход по контрактам</th><th>Бюджет</th><th>Доход / бюджет</th></tr></thead><tbody>
+{% for campaign in campaigns %}<tr><td><a href="{% url 'campaigns:detail' campaign.pk %}">{{ campaign.name }}</a></td><td>{{ campaign.lead_count }}</td><td>{{ campaign.active_count }}</td><td>{% if campaign.lead_count %}{% widthratio campaign.active_count campaign.lead_count 100 %}%{% else %}0%{% endif %}</td><td>{{ campaign.contract_income|default_if_none:"0.00" }}</td><td>{{ campaign.budget }}</td><td>{% if campaign.budget %}{% widthratio campaign.contract_income|default_if_none:0 campaign.budget 100 %}%{% else %}—{% endif %}</td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty">Нет кампаний для отображения.</div>{% endif %}{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}{{ page_title|default:"Форма" }} · CRM{% endblock %}{% block content %}
+<div class="form-card"><h1>{{ page_title|default:"Форма" }}</h1><form method="post" enctype="multipart/form-data">{% csrf_token %}
+{{ form.non_field_errors }}{% for field in form %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}{% for error in field.errors %}<span class="error">{{ error }}</span>{% endfor %}</div>{% endfor %}
+<button type="submit">Сохранить</button> <a class="button secondary" href="javascript:history.back()">Отмена</a></form></div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}{{ page_title }} · CRM{% endblock %}{% block content %}
+<div class="heading"><h1>{{ page_title }}</h1>{% if create_url %}<a class="button" href="{% url create_url %}">＋ Создать</a>{% endif %}</div>
+{% if objects %}<div class="table-wrap"><table><thead><tr><th>Название / запись</th><th>Информация</th><th>Действия</th></tr></thead><tbody>
+{% for object in objects %}<tr><td><a href="{% url detail_url object.pk %}">{% if object.name %}{{ object.name }}{% elif object.full_name %}{{ object.full_name }}{% else %}{{ object }}{% endif %}</a></td>
+<td>{{ object }}</td><td class="actions">
+{% if object.pk %}<a href="{{ request.path }}{{ object.pk }}/edit/" class="small-link">Изменить</a>{% endif %}
+{% if object.pk %}<a href="{{ request.path }}{{ object.pk }}/delete/" class="small-link danger">Удалить</a>{% endif %}
+</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">Записей пока нет.</div>{% endif %}
+{% endblock %}

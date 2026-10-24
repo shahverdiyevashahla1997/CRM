@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Потенциальные клиенты · CRM{% endblock %}{% block content %}
+<div class="heading"><h1>Потенциальные клиенты</h1><a class="button" href="{% url 'leads:create' %}">＋ Создать</a></div>
+{% if objects %}<div class="table-wrap"><table><thead><tr><th>Ф. И. О.</th><th>Телефон / email</th><th>Кампания</th><th>Действия</th></tr></thead><tbody>
+{% for object in objects %}<tr><td><a href="{% url 'leads:detail' object.pk %}">{{ object.full_name }}</a></td><td>{{ object.phone }}<br>{{ object.email }}</td><td>{{ object.campaign }}</td><td class="actions"><a class="small-link" href="{% url 'leads:edit' object.pk %}">Изменить</a>{% if not object.is_active_client %}<a class="small-link" href="{% url 'active_clients:create' %}?lead={{ object.pk }}">Перевести в активные</a>{% endif %}<a class="small-link danger" href="{% url 'leads:delete' object.pk %}">Удалить</a></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty">Потенциальных клиентов пока нет.</div>{% endif %}{% endblock %}

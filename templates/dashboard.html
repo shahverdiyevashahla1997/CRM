@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}Главная · CRM{% endblock %}{% block content %}
+<h1>CRM-система</h1><p class="lead">Управление клиентами, услугами, рекламными кампаниями и контрактами.</p>
+{% if request.user.is_authenticated %}
+<div class="cards">
+<a class="card" href="/services/"><h2>Услуги</h2><p>Каталог услуг компании</p></a>
+<a class="card" href="/campaigns/"><h2>Рекламные кампании</h2><p>Каналы продвижения и бюджеты</p></a>
+<a class="card" href="/leads/"><h2>Потенциальные клиенты</h2><p>Новые обращения и источники</p></a>
+<a class="card" href="/contracts/"><h2>Контракты</h2><p>Документы и суммы сделок</p></a>
+<a class="card" href="/active-clients/"><h2>Активные клиенты</h2><p>Клиенты с заключёнными договорами</p></a>
+<a class="card" href="/campaigns/stats/"><h2>Статистика</h2><p>Результативность рекламы</p></a>
+</div>
+{% else %}<p><a class="button" href="{% url 'login' %}">Войти в систему</a></p>{% endif %}{% endblock %}

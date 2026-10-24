@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Активный клиент · CRM{% endblock %}{% block content %}
+<h1>Активный клиент</h1><div class="detail-card">
+<p><strong>Ф. И. О.:</strong> {{ object.lead.full_name }}</p><p><strong>Телефон:</strong> {{ object.lead.phone }}</p><p><strong>Email:</strong> {{ object.lead.email }}</p><p><strong>Кампания:</strong> {{ object.lead.campaign }}</p>
+<hr><p><strong>Контракт:</strong> {{ object.contract.name }}</p><p><strong>Услуга:</strong> {{ object.contract.service }}</p><p><strong>Дата заключения:</strong> {{ object.contract.signed_date }}</p><p><strong>Период:</strong> {{ object.contract.start_date }} — {{ object.contract.end_date }}</p><p><strong>Сумма:</strong> {{ object.contract.amount }}</p>
+{% if object.contract.document %}<p><a href="{{ object.contract.document.url }}">Открыть документ</a></p>{% endif %}</div><div class="actions"><a class="button" href="{% url 'active_clients:edit' object.pk %}">Редактировать</a><a class="button danger-bg" href="{% url 'active_clients:delete' object.pk %}">Удалить</a></div>{% endblock %}
